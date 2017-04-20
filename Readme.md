@@ -11,7 +11,7 @@ example main.tf file:
 # This makes a load balancer
 
 module "alb" {
-  source = "./alb"
+  source              = "git::https://github.com/Janus-vistaprint/tf_alb.git"
 
   # the load balancers name
   lb_name = "${var.app_name}"
@@ -20,6 +20,12 @@ module "alb" {
   lb_port        = [80, 443]
   public_subnets = ["sg-ids"]
   vpc_id         = "YOUR VPC ID"
+
+  ### Optional arguments, to manage route 53"
+  route53_dns_name    = "mytestloadbalancer.myworld.com"
+
+  # route53 DNS zone to modify
+  route53_dns_zone_id = "/hostedzone/123456"  
 }
 
 # This makes an ecs cluster
