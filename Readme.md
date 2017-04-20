@@ -5,7 +5,7 @@ this is a suite of modules that help you build an autoscaling ecs cluster. This 
 
 example main.tf file:
 
-`terraform apply -var aws_region=${region} -var app_name=${app} -var environment=${environment} -var image_tag=8547322993988.dkr.ecr.eu-west-1.amazonaws.com/myapp:1.0.0
+`terraform apply -var aws_region=${region} -var app_name=${app} -var environment=${environment} -var image_tag=8547322993988.dkr.ecr.eu-west-1.amazonaws.com/myapp:1.0.0`
 
 ```
 # This makes a load balancer
