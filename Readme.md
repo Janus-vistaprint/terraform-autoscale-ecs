@@ -30,7 +30,7 @@ module "alb" {
 
 # This makes an ecs cluster
 module "ecs" {
-  source     = "./ecs"
+  source     = "git://https://github.com/Janus-vistaprint/tf_ecs_cluster.git"
   aws_region = "${var.aws_region}"
 
   # how much disk should a server have in gb
