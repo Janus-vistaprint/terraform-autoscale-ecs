@@ -1,5 +1,5 @@
 resource "aws_iam_role" "ecs_service" {
-  name = "tf-${var.task_name}"
+  name = "tf-${var.task_name}-${var.environment}"
 
   assume_role_policy = <<EOF
 {
@@ -25,7 +25,7 @@ EOF
 }
 
 resource "aws_iam_role_policy" "ecs_service" {
-  name = "tf-${var.task_name}_ecs_policy"
+  name = "tf-${var.task_name}_ecs_policy-${var.environment}"
   role = "${aws_iam_role.ecs_service.name}"
 
   policy = <<EOF
