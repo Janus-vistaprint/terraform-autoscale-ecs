@@ -1,12 +1,14 @@
 ## terraform-autoscale-ecs
 
-this is a suite of modules that help you build an autoscaling ecs cluster. This wires up cloudwatch alarms to scale the cluster up and down when required
+this is a suite of modules that help you build an autoscaling ecs cluster. This wires up cloudwatch alarms to scale the cluster, and associated containers up and down when required.
 
 
 example main.tf file:
 
 `terraform apply -var aws_region=${region} -var app_name=${app} -var environment=${environment} -var image_tag=8547322993988.dkr.ecr.eu-west-1.amazonaws.com/myapp:1.0.0`
 
+
+This would be an example file that uses our modules. This creates an alb, ecs cluster, and registers an ecs service in the cluster with the given docker tag.
 ```
 # This makes a load balancer
 
@@ -30,7 +32,7 @@ module "alb" {
 
 # This makes an ecs cluster
 module "ecs" {
-  source     = "git://https://github.com/Janus-vistaprint/tf_ecs_cluster.git"
+  source     = "git::https://github.com/Janus-vistaprint/tf_ecs_cluster.git"
   aws_region = "${var.aws_region}"
 
   # how much disk should a server have in gb
@@ -53,8 +55,8 @@ module "ecs" {
 
 # This registers a "service" (a set of containers) in the cluster made above with the image tag specified. 
 module "ecs_service" {
-  source = "./ecs_service"
-  vpc_id = "${data.aws_cloudformation_stack.network.outputs["PrimaryVPCId"]}"
+  source = "git:https://github.com/Janus-vistaprint/tf_ecs_default_service.git"
+  vpc_id = "YOUR VPCID"
 
   # the port in the container we should forward traffic to
   container_port = 80
