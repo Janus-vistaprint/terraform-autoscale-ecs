@@ -18,9 +18,6 @@ resource "aws_ecs_service" "svc" {
     "aws_alb_listener.front_end"
   ]
 
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 data "template_file" "task_definition" {
