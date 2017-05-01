@@ -24,9 +24,11 @@ resource "aws_ecs_service" "svc" {
     field = "instanceId"
   }
   
+  /*  enabling this breaks teardown/rebuild
   lifecycle {
     create_before_destroy = true
   }
+  */
 }
 
 data "template_file" "task_definition" {
