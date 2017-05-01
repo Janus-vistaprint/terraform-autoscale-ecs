@@ -18,6 +18,12 @@ resource "aws_ecs_service" "svc" {
     "aws_alb_listener.front_end"
   ]
 
+  # We should spread across instances since we scale up or down on resources
+  placement_strategy {
+    type  = "spread"
+    field = "instanceId"
+  }
+
   lifecycle {
     create_before_destroy = true
   }
