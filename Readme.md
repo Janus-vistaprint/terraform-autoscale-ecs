@@ -13,7 +13,7 @@ This would be an example file that uses our modules. This creates an alb, ecs cl
 # This makes a load balancer
 
 module "alb" {
-  source              = "git::https://github.com/Janus-vistaprint/tf_alb.git"
+  source              = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_alb"
 
   # the load balancers name
   lb_name = "${var.app_name}"
@@ -32,7 +32,7 @@ module "alb" {
 
 # This makes an ecs cluster
 module "ecs" {
-  source     = "git::https://github.com/Janus-vistaprint/tf_ecs_cluster.git"
+  source     = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_ecs_cluster"
   aws_region = "${var.aws_region}"
 
   # how much disk should a server have in gb
@@ -55,7 +55,7 @@ module "ecs" {
 
 # This registers a "service" (a set of containers) in the cluster made above with the image tag specified. 
 module "ecs_service" {
-  source = "git:https://github.com/Janus-vistaprint/tf_ecs_default_service.git"
+  source = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_ecs_default_service"
   vpc_id = "YOUR VPCID"
 
   # the port in the container we should forward traffic to
