@@ -24,9 +24,11 @@ resource "aws_ecs_service" "svc" {
     field = "instanceId"
   }
 
-  lifecycle {
-    create_before_destroy = true
-  }
+  # We have found that create_before_destroy breaks teardown.  
+  #lifecycle {
+  #  create_before_destroy = true
+  #}
+  
 }
 
 data "template_file" "task_definition" {
