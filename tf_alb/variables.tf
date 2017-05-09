@@ -12,6 +12,11 @@ variable "lb_port" {
   default = [80]
 }
 
+variable "internal" {
+  description = "If true, the ALB will be internal."
+  default     = false
+}
+
 variable "vpc_id" {
   type = "string"
 }
