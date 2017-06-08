@@ -112,18 +112,25 @@ variable "vpc_id" {
 
 variable "log_group_region" {
   description = "AWS Region for application cloud watch logs"
-  default = ""
+  default     = ""
 }
 
-variable "alb_default_listener_arn" {
-}
+variable "alb_default_listener_arn" {}
 
-variable "alb_mapping"{
+variable "alb_mapping" {
   description = "Path Mapping for additional listeners"
-  default = "/"
+  default     = "/"
 }
 
-variable "alb_priority"{
+variable "alb_priority" {
   description = "Priority of mapping on ALB"
-  default = "1"
+  default     = "1"
+}
+
+variable "container_cpu_scale_out" {
+  default = 70
+}
+
+variable "container_cpu_scale_in" {
+  default = 15
 }
