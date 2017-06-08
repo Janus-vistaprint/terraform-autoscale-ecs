@@ -9,7 +9,7 @@ example main.tf file:
 
 
 This would be an example file that uses our modules. This creates an alb, ecs cluster, and registers an ecs service in the cluster with the given docker tag.
-```
+```hcl
 # This makes a load balancer
 
 module "alb" {
@@ -51,6 +51,14 @@ module "ecs" {
   lb_security_group = "${module.alb.lb_security_group}"
   vpc_id            = "YOUR VPC ID"
   private_subnets   = ["subnet-ids"]
+  # scale cluster out on memory %
+  cluster_memory_scale_out = 70
+  # scale cluster in on memory %
+  cluster_memory_scale_in = 20 
+  # scale cluster out on cpu %
+  cluster_cpu_scale_out = 70
+  # scale cluster in on cpu %
+  cluster_cpu_scale_in = 20
 }
 
 # This registers a "service" (a set of containers) in the cluster made above with the image tag specified. 
@@ -84,6 +92,10 @@ module "ecs_service" {
   # containers can go over the limit if resources are avalible 
   # http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
   containers_cpu_unit = 256
+  # container scale out on cpu %
+  container_cpu_scale_out = 70
+  # container scale in on cpu %
+  container_cpu_scale_in = 15
   # how many containers should always be around during deploy
   deployment_minimum_healthy_percent = "100"
   deployment_maximum_percent         = "200"
