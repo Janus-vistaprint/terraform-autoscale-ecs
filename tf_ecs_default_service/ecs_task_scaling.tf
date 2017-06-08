@@ -18,8 +18,7 @@ resource "aws_appautoscaling_policy" "default-up" {
   metric_aggregation_type = "Average"
 
   step_adjustment {
-    metric_interval_lower_bound = 0
-    scaling_adjustment          = 1
+    scaling_adjustment = 1
   }
 
   depends_on = ["aws_appautoscaling_target.default"]
@@ -35,8 +34,7 @@ resource "aws_appautoscaling_policy" "default-down" {
   metric_aggregation_type = "Average"
 
   step_adjustment {
-    metric_interval_lower_bound = 0
-    scaling_adjustment          = -1
+    scaling_adjustment = -1
   }
 
   depends_on = ["aws_appautoscaling_target.default"]
@@ -50,7 +48,7 @@ resource "aws_cloudwatch_metric_alarm" "default_service_cpu_high" {
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
-  threshold           = "70"
+  threshold           = "${container_cpu_scale_out}"
 
   dimensions {
     ClusterName = "${var.cluster_name}"
@@ -68,7 +66,7 @@ resource "aws_cloudwatch_metric_alarm" "default_service_cpu_low" {
   namespace           = "AWS/ECS"
   period              = "300"
   statistic           = "Average"
-  threshold           = "15"
+  threshold           = "${container_cpu_scale_in}"
 
   dimensions {
     ClusterName = "${var.cluster_name}"
