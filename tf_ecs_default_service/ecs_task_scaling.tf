@@ -18,7 +18,8 @@ resource "aws_appautoscaling_policy" "default-up" {
   metric_aggregation_type = "Average"
 
   step_adjustment {
-    scaling_adjustment = 1
+    metric_interval_lower_bound = 0
+    scaling_adjustment          = 1
   }
 
   depends_on = ["aws_appautoscaling_target.default"]
@@ -34,7 +35,8 @@ resource "aws_appautoscaling_policy" "default-down" {
   metric_aggregation_type = "Average"
 
   step_adjustment {
-    scaling_adjustment = -1
+    metric_interval_lower_bound = 0
+    scaling_adjustment          = -1
   }
 
   depends_on = ["aws_appautoscaling_target.default"]
