@@ -12,7 +12,7 @@ variable "lb_port" {
   default = [80]
 }
 
-variable "lb_whitelist_ip" {
+variable "lb_cidr_blocks" {
   default = ["0.0.0.0/0"]
 }
 

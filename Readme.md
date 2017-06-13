@@ -22,7 +22,7 @@ module "alb" {
   lb_port        = [80, 443]
   
   # what incoming ips should the load balancer whitelist
-  lb_whitelist_ip     = ['0.0.0.0/0']
+  lb_cidr_blocks     = ['0.0.0.0/0']
  
   public_subnets = ["sg-ids"]
   vpc_id         = "YOUR VPC ID"

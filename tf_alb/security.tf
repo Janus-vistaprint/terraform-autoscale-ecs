@@ -8,7 +8,7 @@ resource "aws_security_group" "lb_sg" {
     protocol    = "tcp"
     from_port   = "${element(var.lb_port, count.index)}"
     to_port     = "${element(var.lb_port, count.index)}"
-    cidr_blocks = "${var.lb_whitelist_ip}"
+    cidr_blocks = "${var.lb_cidr_blocks}"
   }
 
   egress {
