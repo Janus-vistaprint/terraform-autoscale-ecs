@@ -50,7 +50,7 @@ resource "aws_cloudwatch_metric_alarm" "default_service_cpu_high" {
   namespace           = "AWS/ECS"
   period              = "120"
   statistic           = "Average"
-  threshold           = "${container_cpu_scale_out}"
+  threshold           = "${var.container_cpu_scale_out}"
 
   dimensions {
     ClusterName = "${var.cluster_name}"
