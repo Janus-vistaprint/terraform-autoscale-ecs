@@ -18,6 +18,10 @@ variable "container_port" {
   default = 80
 }
 
+variable "container_protocol" {
+  default = "HTTP"
+}
+
 variable "lb_id" {
   description = "loadbalancer to attach to"
 }
