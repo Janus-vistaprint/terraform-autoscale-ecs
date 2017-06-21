@@ -72,6 +72,8 @@ module "ecs_service" {
 
   # the port in the container we should forward traffic to
   container_port = 80
+  # the protocol used by health checks
+  container_protocol = "HTTP"
 
   # the load balancer we should connec to
   lb_id = "${module.alb.lb_id}"
