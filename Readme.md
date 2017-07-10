@@ -63,6 +63,8 @@ module "ecs" {
   cluster_cpu_scale_out = 70
   # scale cluster in on cpu %
   cluster_cpu_scale_in = 20
+  # list of instance metrics we'd like to enable
+  asg_metrics = ["GroupTerminatingInstances", "GroupMaxSize", "GroupDesiredCapacity", "GroupPendingInstances", "GroupInServiceInstances", "GroupMinSize", "GroupTotalInstances"]
 }
 
 # This registers a "service" (a set of containers) in the cluster made above with the image tag specified. 
