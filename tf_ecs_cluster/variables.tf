@@ -65,3 +65,8 @@ variable "cluster_cpu_scale_out" {
 variable "cluster_cpu_scale_in" {
   default = 20
 }
+
+variable "asg_metrics" {
+  description = "The list of metrics to enable for this auto scale group."
+  default = []  
+}
