@@ -65,3 +65,7 @@ variable "cluster_cpu_scale_out" {
 variable "cluster_cpu_scale_in" {
   default = 20
 }
+
+variable "asg_metrics" {
+  default = []  
+}
