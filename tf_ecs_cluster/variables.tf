@@ -49,3 +49,24 @@ variable "lb_security_group" {
 variable "vpc_id" {
   type = "string"
 }
+
+variable "cluster_memory_scale_out" {
+  default = 70
+}
+
+variable "cluster_memory_scale_in" {
+  default = 20
+}
+
+variable "cluster_cpu_scale_out" {
+  default = 70
+}
+
+variable "cluster_cpu_scale_in" {
+  default = 20
+}
+
+variable "asg_metrics" {
+  description = "The list of metrics to enable for this auto scale group."
+  default = []  
+}

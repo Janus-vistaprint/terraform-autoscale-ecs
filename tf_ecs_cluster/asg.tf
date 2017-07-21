@@ -42,6 +42,7 @@ resource "aws_autoscaling_group" "app" {
   launch_configuration = "${aws_launch_configuration.app.name}"
   termination_policies = ["OldestLaunchConfiguration", "OldestInstance"]
   depends_on           = ["aws_launch_configuration.app"]
+  enabled_metrics      = "${var.asg_metrics}"
 
   /*
        in 0.9.3 deletes are not handled properly when lc, and asg's have create before destroy

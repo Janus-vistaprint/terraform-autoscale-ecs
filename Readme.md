@@ -9,7 +9,7 @@ example main.tf file:
 
 
 This would be an example file that uses our modules. This creates an alb, ecs cluster, and registers an ecs service in the cluster with the given docker tag.
-```
+
 # This makes a load balancer, no logging
 module "alb" {
   source              = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_alb"
@@ -19,9 +19,13 @@ module "alb" {
 
   # what ports should the load balancer forward
   lb_port        = [80, 443]
+  
+  # what incoming ips should the load balancer whitelist
+  lb_cidr_blocks     = ['0.0.0.0/0']
+ 
   public_subnets = ["sg-ids"]
   vpc_id         = "YOUR VPC ID"
-
+  
   ### Optional arguments, to manage route 53"
   route53_dns_name    = "mytestloadbalancer.myworld.com"
 
@@ -75,6 +79,16 @@ module "ecs" {
   lb_security_group = "${module.alb.lb_security_group}"
   vpc_id            = "YOUR VPC ID"
   private_subnets   = ["subnet-ids"]
+  # scale cluster out on memory %
+  cluster_memory_scale_out = 70
+  # scale cluster in on memory %
+  cluster_memory_scale_in = 20 
+  # scale cluster out on cpu %
+  cluster_cpu_scale_out = 70
+  # scale cluster in on cpu %
+  cluster_cpu_scale_in = 20
+  # list of instance metrics we'd like to enable, defaults to empty array
+  asg_metrics = ["GroupTerminatingInstances", "GroupMaxSize", "GroupDesiredCapacity", "GroupPendingInstances", "GroupInServiceInstances", "GroupMinSize", "GroupTotalInstances"]
 }
 
 # This registers a "service" (a set of containers) in the cluster made above with the image tag specified. 
@@ -84,6 +98,8 @@ module "ecs_service" {
 
   # the port in the container we should forward traffic to
   container_port = 80
+  # the protocol used by health checks
+  container_protocol = "HTTP"
 
   # the load balancer we should connec to
   lb_id = "${module.alb.lb_id}"
@@ -108,6 +124,10 @@ module "ecs_service" {
   # containers can go over the limit if resources are avalible 
   # http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html
   containers_cpu_unit = 256
+  # container scale out on cpu %
+  container_cpu_scale_out = 70
+  # container scale in on cpu %
+  container_cpu_scale_in = 15
   # how many containers should always be around during deploy
   deployment_minimum_healthy_percent = "100"
   deployment_maximum_percent         = "200"

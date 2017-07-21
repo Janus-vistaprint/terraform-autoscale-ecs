@@ -12,6 +12,10 @@ variable "lb_port" {
   default = [80]
 }
 
+variable "lb_cidr_blocks" {
+  default = ["0.0.0.0/0"]
+}
+
 variable "internal" {
   description = "If true, the ALB will be internal."
   default     = false

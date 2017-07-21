@@ -18,6 +18,10 @@ variable "container_port" {
   default = 80
 }
 
+variable "container_protocol" {
+  default = "HTTP"
+}
+
 variable "lb_id" {
   description = "loadbalancer to attach to"
 }
@@ -112,10 +116,18 @@ variable "vpc_id" {
 
 variable "log_group_region" {
   description = "AWS Region for application cloud watch logs"
-  default = ""
+  default     = ""
 }
 
-variable "alb_mapping"{
+variable "alb_mapping" {
   description = "Path Mapping for additional listeners"
-  default = "/"
+  default     = "/"
+}
+
+variable "container_cpu_scale_out" {
+  default = 70
+}
+
+variable "container_cpu_scale_in" {
+  default = 15
 }
