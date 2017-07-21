@@ -9,9 +9,8 @@ example main.tf file:
 
 
 This would be an example file that uses our modules. This creates an alb, ecs cluster, and registers an ecs service in the cluster with the given docker tag.
-```hcl
-# This makes a load balancer
 
+# This makes a load balancer, no logging
 module "alb" {
   source              = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_alb"
 
@@ -32,6 +31,31 @@ module "alb" {
 
   # route53 DNS zone to modify
   route53_dns_zone_id = "/hostedzone/123456"  
+}
+
+# example of load balancer with logs being exported to S3
+module "alb_log" {
+  source  = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_alb_logged"
+
+  # name of load balancer
+  lb_name  = "${var.app_name}"
+
+  # what ports should the load balancer forward
+  lb_port   = [80]
+  public_subnets = ["sg_ids"]
+  vpc_id    = "YOUR VPC ID"
+
+  ### Optional arguments, to manage route 53"
+  route53_dns_name    = "mytestloadbalancer.myworld.com"
+
+  # route53 DNS zone to modify
+  route53_dns_zone_id = "/hostedzone/123456"  
+
+  # optional, destroy bucket if ALB is deleted
+  destroy_bucket_on_delete = false
+
+  # S3 bucket to write logs to
+  aws_log_bucket = "my-alb-logs"
 }
 
 # This makes an ecs cluster
