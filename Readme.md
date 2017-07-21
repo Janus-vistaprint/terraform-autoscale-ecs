@@ -10,6 +10,8 @@ example main.tf file:
 
 This would be an example file that uses our modules. This creates an alb, ecs cluster, and registers an ecs service in the cluster with the given docker tag.
 
+```
+
 # This makes a load balancer, no logging
 module "alb" {
   source              = "git::https://github.com/Janus-vistaprint/terraform-autoscale-ecs.git//tf_alb"
