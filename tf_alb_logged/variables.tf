@@ -3,11 +3,6 @@ variable "public_subnets" {
   type        = "list"
 }
 
-variable "internal" {
-  description = "internal ALB"
-  default     = false
-}
-
 variable "lb_name" {
   description = "lb name"
   type        = "string"
