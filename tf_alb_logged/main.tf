@@ -6,7 +6,6 @@ resource "aws_alb" "main" {
 
   access_logs {
     bucket = "${aws_s3_bucket.logs.bucket}"
-    interval = 5
     prefix = "${var.lb_name}"
   }
 }
