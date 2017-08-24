@@ -43,7 +43,7 @@ variable "key_name" {
 }
 
 variable "lb_security_group" {
-  type = "string"
+  type = "list"
 }
 
 variable "vpc_id" {
@@ -68,5 +68,5 @@ variable "cluster_cpu_scale_in" {
 
 variable "asg_metrics" {
   description = "The list of metrics to enable for this auto scale group."
-  default = []  
+  default     = []
 }
