@@ -9,7 +9,7 @@ resource "aws_security_group" "instance_sg" {
     to_port   = 0
 
     security_groups = [
-      "${var.lb_security_groups == [] ? [${var.lb_security_group}] : ${var.lb_security_groups}}",
+      "${concat(var.lb_security_group,var.lb_security_groups)}",
     ]
   }
 
