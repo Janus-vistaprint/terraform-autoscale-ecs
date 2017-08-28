@@ -8,7 +8,9 @@ resource "aws_security_group" "instance_sg" {
     from_port = 0
     to_port   = 0
 
-    security_groups = "${var.lb_security_groups == [] ? [${var.lb_security_group}] : ${var.lb_security_groups}}"
+    security_groups = [
+      "${var.lb_security_groups == [] ? [${var.lb_security_group}] : ${var.lb_security_groups}}",
+    ]
   }
 
   egress {
