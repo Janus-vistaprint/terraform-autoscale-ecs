@@ -43,7 +43,13 @@ variable "key_name" {
 }
 
 variable "lb_security_group" {
+  type = "string"
+}
+
+variable "additional_lb_security_groups" {
+  description = "additional security groups to allow to the cluster"
   type = "list"
+  default = []
 }
 
 variable "vpc_id" {
