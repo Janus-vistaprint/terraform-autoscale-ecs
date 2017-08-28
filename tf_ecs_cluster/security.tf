@@ -10,6 +10,7 @@ resource "aws_security_group" "instance_sg" {
 
     security_groups = [
       "${var.lb_security_group}",
+      "${var.additional_lb_security_groups}",
     ]
   }
 
