@@ -56,4 +56,8 @@ resource "aws_autoscaling_group" "app" {
     value               = "tf-${var.cluster_name}"
     propagate_at_launch = true
   }
+  /* ignore changes to desired_capacity, as it may be manipulated by autoscaling */
+  lifecycle {
+    ignore_changes = ["desired_capacity"]
+  }
 }

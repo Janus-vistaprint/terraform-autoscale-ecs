@@ -15,7 +15,7 @@ resource "aws_ecs_service" "svc" {
 
   depends_on = [
     "aws_iam_role_policy.ecs_service",
-    "aws_alb_listener.front_end"
+    "aws_alb_listener.front_end",
   ]
 
   # We should spread across instances since we scale up or down on resources
@@ -24,11 +24,11 @@ resource "aws_ecs_service" "svc" {
     field = "instanceId"
   }
 
-  # We have found that create_before_destroy breaks teardown.  
-  #lifecycle {
-  #  create_before_destroy = true
-  #}
-  
+  lifecycle {
+    # We have found that create_before_destroy breaks teardown.  
+    # create_before_destroy = true
+    ignore_changes = ["desired_count"]
+  }
 }
 
 data "template_file" "task_definition" {

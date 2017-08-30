@@ -6,5 +6,5 @@ data "aws_ami" "stable_ecs" {
     values = ["*ecs-optimized*"]
   }
 
-  owners = ["amazon"] # CoreOS
+  owners = ["amazon"]
 }

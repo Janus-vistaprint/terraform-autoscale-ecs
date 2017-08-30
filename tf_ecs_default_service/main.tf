@@ -17,18 +17,18 @@ resource "aws_ecs_service" "svc" {
     "aws_iam_role_policy.ecs_service",
     "aws_alb_listener.front_end",
   ]
-  
+
   # We should spread across instances since we scale up or down on resources
   placement_strategy {
     type  = "spread"
     field = "instanceId"
   }
-  
-  /*  enabling this breaks teardown/rebuild
+
   lifecycle {
-    create_before_destroy = true
+    # enabling this breaks teardown/rebuild
+    # create_before_destroy = true
+    ignore_changes = ["desired_count"]
   }
-  */
 }
 
 data "template_file" "task_definition" {
