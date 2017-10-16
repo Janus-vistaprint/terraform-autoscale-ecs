@@ -13,3 +13,7 @@ output "lb_dns_name" {
 output "lb_arn" {
   value = "${aws_alb.main.arn}"
 }
+
+output "lb_arn_suffix" {
+  value = "${aws_alb.main.arn_suffix}"
+}
