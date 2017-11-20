@@ -106,6 +106,16 @@ variable "livecheck_unhealthy_threshold" {
   description = "The number of consecutive health check failures required before considering the target unhealthy. Defaults to 2."
 }
 
+variable "livecheck_response_code" {
+  default     = 200
+  description = "Response code from livecheck service"
+}
+
+variable "livecheck_timeout" {
+  default     = 5
+  description = "Livecheck timeout in seconds"
+}
+
 variable "vpc_id" {
   type = "string"
 }

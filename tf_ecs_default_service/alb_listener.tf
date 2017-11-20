@@ -8,6 +8,8 @@ resource "aws_alb_target_group" "grp" {
   deregistration_delay = "${var.deregistration_delay}"
 
   health_check {
+    matcher             = "${var.livecheck_response_code}"
+    timeout             = "${var.livecheck_timeout}"
     interval            = "${var.livecheck_interval}"
     path                = "${var.livecheck_path}"
     healthy_threshold   = "${var.livecheck_healthy_threshold}"
