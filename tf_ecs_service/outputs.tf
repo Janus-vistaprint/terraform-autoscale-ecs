@@ -13,3 +13,7 @@ output "listener_arn" {
 output "target_group_arn_suffix" {
   value = "${aws_alb_target_group.grp.arn_suffix}"
 }
+
+output "iam_role_id" {
+  value = "${aws_iam_role.ecs_service.id}"
+}

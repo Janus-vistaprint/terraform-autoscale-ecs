@@ -17,3 +17,7 @@ output "cluster_arn" {
 output "cluster_name" {
   value = "${aws_ecs_cluster.main.name}"
 }
+
+output "iam_role_id" {
+  value = "${aws_iam_role.app_instance.id}"
+}
